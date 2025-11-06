@@ -1,0 +1,38 @@
+# 1) Tulis .gitignore
+@"
+# Node / Next.js
+node_modules/
+Node/
+.next/
+out/
+dist/
+build/
+coverage/
+.vercel/
+
+# Logs & misc
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.pnp.*
+
+# Env
+.env
+.env.*
+!.env.example
+
+# OS / Editor
+.DS_Store
+.vscode/*
+!.vscode/settings.json
+!.vscode/extensions.json
+"@ | Set-Content -Encoding UTF8 .gitignore
+
+# 2) Hapus dari index (hanya kalau foldernya memang ada)
+$paths = @("node_modules","Node",".next","out","dist","build","coverage",".vercel")
+foreach ($p in $paths) { if (Test-Path $p) { git rm -r --cached $p } }
+
+# 3) Commit .gitignore
+git add .gitignore
+git commit -m "chore(git): ignore node_modules & build artifacts"
