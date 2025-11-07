@@ -67,12 +67,8 @@ export default function DomainHygieneLanding() {
           </p>
 
           <div className="ctaRow">
-            <a
-              href={FORM_URL}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="btn btnPrimary"
-            >
+            {/* diarahkan ke gate pembayaran */}
+            <a href="#pay" className="btn btnPrimary">
               Mulai Audit — Rp55.000 / 336 jam
             </a>
             <a href={MAILTO} className="btn btnOutline">
@@ -124,6 +120,31 @@ export default function DomainHygieneLanding() {
                 title="Email Domain Hygiene — Visual Story"
                 loading="lazy"
               />
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ===== PAY GATE ===== */}
+      <section id="pay" className="section">
+        <div className="container narrow">
+          <div className="card accent-orange">
+            <h2 className="h2">Pembayaran</h2>
+            <p className="muted">
+              Biaya: <b>Rp55.000 / domain</b> termasuk dukungan 336 jam (~2 minggu) sejak audit pertama.
+            </p>
+
+            <div style={{ display: "grid", gap: 12 }}>
+              <div className="iframeWrap" style={{ padding: 16 }}>
+                <p className="muted" style={{ margin: 0 }}>
+                  Transfer ke:
+                  <br /> Bank CIMB Niaga a/n <b>PT Allanray Teknologi Semesta</b>
+                  <br /> No.Rek: <b>xxxx-xxxx-xxxx</b> {/* isi no rek asli */}
+                  <br /> Berita: <b>DH-{"{email pemesan}"}</b>
+                </p>
+              </div>
+
+              <PayGate />
             </div>
           </div>
         </div>
@@ -410,5 +431,34 @@ export default function DomainHygieneLanding() {
         }
       `}</style>
     </main>
+  );
+}
+
+/** Komponen gate pembayaran (checkbox → enable tombol ke Google Form) */
+function PayGate() {
+  const [ok, setOk] = useState(false);
+  return (
+    <div style={{ display: "grid", gap: 12 }}>
+      <label style={{ display: "flex", alignItems: "center", gap: 8, fontSize: 14 }}>
+        <input
+          type="checkbox"
+          onChange={(e) => setOk(e.target.checked)}
+          aria-label="Saya sudah bayar dan siap lanjut ke Form"
+        />
+        Saya sudah bayar/QRIS dan siap lanjut ke Form
+      </label>
+      <a
+        href={FORM_URL}
+        target="_blank"
+        rel="noopener noreferrer"
+        className="btn btnPrimary"
+        style={{ pointerEvents: ok ? "auto" : "none", opacity: ok ? 1 : 0.5 }}
+      >
+        Lanjut ke Form Google
+      </a>
+      <p className="muted" style={{ fontSize: 12, margin: 0 }}>
+        Catatan: tombol aktif setelah Anda centang “sudah bayar”.
+      </p>
+    </div>
   );
 }
