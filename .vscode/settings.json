@@ -1,28 +1,10 @@
 {
-  "editor.formatOnSave": true,
-  "editor.defaultFormatter": "esbenp.prettier-vscode",
-
-  "[javascript]": { "editor.defaultFormatter": "esbenp.prettier-vscode" },
-  "[typescript]": { "editor.defaultFormatter": "esbenp.prettier-vscode" },
-  "[javascriptreact]": { "editor.defaultFormatter": "esbenp.prettier-vscode" },
-  "[typescriptreact]": { "editor.defaultFormatter": "esbenp.prettier-vscode" },
-  "[json]": { "editor.defaultFormatter": "esbenp.prettier-vscode" },
-
-  "eslint.validate": [
-    "javascript",
-    "javascriptreact",
-    "typescript",
-    "typescriptreact"
-  ],
-  "editor.codeActionsOnSave": {
-    "source.fixAll.eslint": true
-  },
-
-  "tailwindCSS.experimental.classRegex": [
-    "clsx\\(([^)]*)\\)",
-    "cva\\(([^)]*)\\)",
-    "tw`([^`]*)`",
-    "tw\\([^)]*\\)"
-  ],
-  "files.associations": { "*.css": "postcss" }
+  "cSpell.ignoreRegExpList": [
+    "#([0-9a-fA-F]{3,8})", // hex color
+    "\\[#[0-9a-fA-F]{6}\\]", // Tailwind arbitrary color [#xxxxxx]
+    "px-\\d+",
+    "py-\\d+",
+    "mt-\\d+",
+    "mx-\\d+" // kelas Tailwind umum
+  ]
 }

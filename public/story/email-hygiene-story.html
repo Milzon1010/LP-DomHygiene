@@ -1,0 +1,132 @@
+
+<!doctype html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Email Domain Hygiene – Story</title>
+<style>
+  :root{
+    --bg:#0a0a0e;--panel:#1c1c27;--panel-soft:#242433;
+    --txt:#eef0ff;--muted:#aeb0c6;--indigo:#6366f1;--green:#22c55e;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--txt);font-family:system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,'Helvetica Neue',Arial,sans-serif;}
+  .wrap{max-width:720px;margin:0 auto;padding:24px}
+  .logo{display:inline-block;background:#171722;border:1px solid #2a2a3a;color:var(--txt);padding:10px 14px;border-radius:14px;font-weight:800;letter-spacing:.2px}
+  h1{margin:18px 0 4px;font-size:40px;line-height:1.2}
+  h1 .em{color:var(--indigo)}
+  .sub{color:#cbd0ff;margin:0 0 16px}
+  .hint{color:var(--muted);margin:6px 0 18px}
+  .grid{display:grid;grid-template-columns:1fr;gap:16px}
+  @media(min-width:720px){.grid{grid-template-columns:1fr 1fr}}
+  .card{background:var(--panel);border:1px solid #2a2a3a;border-radius:20px;padding:16px}
+  .subcard{background:var(--panel-soft);border:1px solid #2c2c3d;border-radius:14px;padding:12px;margin-top:10px}
+  .title{font-weight:800;font-size:22px;margin:0 0 8px}
+  .muted{color:var(--muted)}
+  .flow{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-top:6px}
+  .node{flex:1;min-width:0;background:#2a2a3a;border-radius:14px;padding:10px 12px;text-align:center}
+  .node.auth{background:var(--indigo);color:white;font-weight:700}
+  .arrow{width:22px;height:2px;background:#6c6e85;border-radius:2px;flex:0 0 22px}
+  .badge{display:inline-block;background:#1e6040;color:white;border-radius:999px;padding:8px 14px;font-weight:700;margin-top:12px}
+  /* animation: pulse auth node */
+  @keyframes pulse{0%{transform:scale(1)}50%{transform:scale(1.05)}100%{transform:scale(1)}}
+  .node.auth{animation:pulse 2.2s ease-in-out infinite}
+  /* steps */
+  .step{background:var(--panel-soft);border:1px solid #2b2c3a;border-radius:14px;padding:12px}
+  .step .name{font-weight:800;margin:0 0 6px}
+  .bar{height:8px;background:#1f2030;border-radius:6px;overflow:hidden}
+  .bar>.f{height:100%;width:0;background:var(--indigo);animation:grow 2s forwards}
+  @keyframes grow{to{width:100%}}
+  /* result panel */
+  .result{background:var(--panel-soft);border:1px solid #2b2c3a;border-radius:16px;padding:14px;margin-top:10px}
+  .pass{color:var(--green);font-weight:800}
+  /* sticky CTA */
+  .cta{position:sticky;bottom:8px;margin-top:18px;background:#1a1b28;border:1px solid #2a2a3a;border-radius:16px;padding:12px}
+  .cta .row{display:flex;flex-wrap:wrap;gap:10px;align-items:center;justify-content:space-between}
+  .cta a{color:white;text-decoration:none;background:var(--indigo);padding:10px 14px;border-radius:999px;font-weight:800}
+  .cta small{color:var(--muted)}
+</style>
+</head>
+<body>
+  <div class="wrap">
+    <div class="logo">JARM TechSight</div>
+    <h1>Stop Spam. <span class="em">Start Delivering.</span></h1>
+    <p class="sub">Email Domain Hygiene — SPF • DKIM • DMARC</p>
+    <p class="hint">Konfigurasi benar → <b>Authentication PASS</b> → Inbox. Layout ini anti tumpang‑tindih dan responsif (rapi di mobile & desktop).</p>
+
+    <div class="grid">
+      <div class="card">
+        <div class="title">Alur Kerja</div>
+        <div class="subcard">
+          <div class="title" style="font-size:18px">Tujuan</div>
+          <div class="muted">Domain → Auth → Provider → Inbox</div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="title">Visual Flow</div>
+        <div class="flow">
+          <div class="node">Domain<br>DNS</div>
+          <div class="arrow"></div>
+          <div class="node auth">Auth<br>(SPF / DKIM / DMARC)</div>
+          <div class="arrow"></div>
+          <div class="node">Mail<br>Provider</div>
+        </div>
+        <div class="badge">Inbox ✓</div>
+      </div>
+    </div>
+
+    <div class="grid" style="margin-top:16px">
+      <div class="card">
+        <div class="title">Cara Kerja (≤ 48 Jam)</div>
+        <div class="step">
+          <div class="name">1) Kickoff & Akses DNS</div>
+          <div class="muted">Kirim domain + provider email. Beri akses edit DNS sementara.</div>
+          <div class="bar"><div class="f" style="animation-delay:.1s"></div></div>
+        </div>
+        <div class="step">
+          <div class="name">2) Audit Cepat</div>
+          <div class="muted">Cek MX, SPF, DKIM selector, DMARC, dan mailer pihak ketiga.</div>
+          <div class="bar"><div class="f" style="animation-delay:.3s"></div></div>
+        </div>
+        <div class="step">
+          <div class="name">3) Konfigurasi Aman</div>
+          <div class="muted">SPF single; publish DKIM; DMARC staging none → quarantine.</div>
+          <div class="bar"><div class="f" style="animation-delay:.5s"></div></div>
+        </div>
+        <div class="step">
+          <div class="name">4) Uji & Laporan</div>
+          <div class="muted">Kirim uji; cek header <code>Authentication‑Results</code>; PDF ringkas.</div>
+          <div class="bar"><div class="f" style="animation-delay:.7s"></div></div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="title">Contoh Hasil</div>
+        <div class="result">
+          <div style="font-size:20px;font-weight:800;margin-bottom:8px">Show original → Headers</div>
+          <div class="subcard" style="display:flex;gap:10px;justify-content:space-between">
+            <div>spf=<span class="pass">pass</span></div>
+            <div>dkim=<span class="pass">pass</span></div>
+            <div>dmarc=<span class="pass">pass</span></div>
+          </div>
+          <div class="subcard" style="margin-top:12px">
+            <b>Authentication‑Results:</b> <span class="pass">pass</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="cta">
+      <div class="row">
+        <small>Aktifkan SPF/DKIM/DMARC sekarang. Hasil terukur ≤ 48 jam.</small>
+        <div>
+          <a href="https://www.allanraytechsight.co.id" target="_blank" rel="noopener">Website</a>
+          <a href="https://wa.me/6281234567890" target="_blank" rel="noopener" style="background:#22c55e">WhatsApp</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
